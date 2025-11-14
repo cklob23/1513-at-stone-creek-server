@@ -6,14 +6,14 @@ import { sendEmail } from "./utils/sendEmail.js";
 const app = express();
 const PORT = 4000;
 
-//app.use(cors());
+app.use(cors());
 
-app.use(
-  cors({
-    origin: "https://one513atstonecreek.onrender.com",
-    methods: ["POST", "GET"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://one513atstonecreek.onrender.com",
+//     methods: ["POST", "GET"],
+//   })
+// );
 app.use(express.json());
 
 /**

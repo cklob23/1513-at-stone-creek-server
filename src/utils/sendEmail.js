@@ -4,7 +4,7 @@ dotenv.config();
 
 export async function sendEmail(email, htmlBody, subject) {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "imap.gmail.com",
     port: 465,
     secure: true,
     auth: {

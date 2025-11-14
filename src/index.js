@@ -5,7 +5,12 @@ import { sendEmail } from "./utils/sendEmail.js";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://one513atstonecreek.onrender.com",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
+
 app.use(express.json());
 
 app.post("/sendEmail", async (req, res) => {

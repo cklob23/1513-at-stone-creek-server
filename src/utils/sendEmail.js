@@ -1,15 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-dotenv.config(); // Loads .env into process.env
-
-
-/**
- * Sends an email with the given HTML body to a specified email address
- *
- * @param {string} email - The recipient of the email.
- * @param {string} htmlBody - The HTML content of the email.
- * @param {Buffer} subject - The subject of the email.
- */
+dotenv.config();
 
 export async function sendEmail(email, htmlBody, subject) {
   const transporter = nodemailer.createTransport({
@@ -18,29 +9,16 @@ export async function sendEmail(email, htmlBody, subject) {
     secure: true,
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_SECRET,
+      pass: process.env.EMAIL_SECRET, // Gmail App Password
     },
-    logger: true,
-    debug: true,
   });
 
-  const info = {
-    from: `"1513 at Stone Creek Inquiry" <1513atstonecreek.inquiries@gmail.com>`,
+  const mailInfo = {
+    from: `"1513 at Stone Creek Inquiry" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: subject,
+    subject,
     html: htmlBody,
   };
-  try {
-    const mailInfo = await transporter.sendMail(info, function (err, data) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Email sent successfully.`);
-        return mailInfo;
-      }
-    });
-  } catch (err) {
-    console.log("Error sending email:", err);
-    throw err;
-  }
+
+  return transporter.sendMail(mailInfo);
 }

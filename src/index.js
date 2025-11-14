@@ -1,28 +1,17 @@
 import express from "express";
 import cors from "cors";
-//import { guestTemplate, hostTemplate } from "./templates/resultTemplate.js";
 import { sendEmail } from "./utils/sendEmail.js";
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
-
-// app.use(
-//   cors({
-//     origin: "https://one513atstonecreek.onrender.com",
-//     methods: ["POST", "GET"],
-//   })
-// );
 app.use(express.json());
 
-/**
- * Send inquiries to customer and host
- * Expects email, html, and subject
- */
 app.post("/sendEmail", async (req, res) => {
   const { email, html, subject } = req.body;
-  console.log(email, html, subject);
+  console.log(email, subject);
+
   if (!email || !html || !subject) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -36,6 +25,6 @@ app.post("/sendEmail", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}...`);
-});
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`Server running on port ${PORT}`)
+);

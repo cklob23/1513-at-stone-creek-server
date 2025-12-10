@@ -6,10 +6,15 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors({
-  origin: "https://one513atstonecreek.onrender.com",
+  origin: [
+    "https://1513atstonecreek.com",
+    "https://www.1513atstonecreek.com",
+    "https://one513atstonecreek.onrender.com"
+  ],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
 }));
+
 
 app.use(express.json());
 
